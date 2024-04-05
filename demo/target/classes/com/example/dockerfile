@@ -1,0 +1,19 @@
+FROM archlinux:latest
+
+# تحديث المستودعات
+RUN pacman -Sy --noconfirm
+
+# تثبيت الحزم اللازمة
+RUN pacman -S --noconfirm jdk-openjdk maven wget ffmpeg
+
+# تثبيت youtube-dl
+RUN wget -O /usr/local/bin/youtube-dl https://yt-dl.org/downloads/latest/youtube-dl && \
+    chmod +x /usr/local/bin/youtube-dl
+
+WORKDIR /app
+COPY . /app
+
+# تنفيذ بناء Maven
+RUN mvn clean install
+
+CMD java -cp "target/*" com.example.main

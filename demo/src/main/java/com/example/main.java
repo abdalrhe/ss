@@ -22,7 +22,7 @@ public class main extends TelegramLongPollingBot {
         }
     }
 
-    private void run() throws TelegramApiException {
+     private void run() throws TelegramApiException {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(this);
@@ -89,10 +89,10 @@ public class main extends TelegramLongPollingBot {
 
     private String downloadVideo(String videoUrl, String downloadDirectory) throws IOException {
         try {
-            Process process = Runtime.getRuntime().exec(new String[]{"youtube-dl", "-o", downloadDirectory + "video.mp4", videoUrl});
+            Process process = Runtime.getRuntime().exec(new String[]{"youtube-dl", "-o", downloadDirectory + "video.%(ext)s", videoUrl});
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                return downloadDirectory + "video.mp4";
+                return downloadDirectory + "video.mkv";
             } else {
                 return null;
             }
@@ -105,12 +105,12 @@ public class main extends TelegramLongPollingBot {
     @Override
     public String getBotUsername() {
         // اسم المستخدم الذي تختاره للبوت
-        return "MR_cisco_robot";
+        return "Save_YouTube_videosbot";
     }
 
     @Override
     public String getBotToken() {
-        // توكن البوت الذي تحصل عليه من BotFather في تلغرام
-        return "5007391185:AAEWVBnieW5jdtT8aidtmQPJ0S6lLY0UwP0";
+        // توكن البوت الذي تحصل عليه منBotFather في تلغرام
+        return "6709337006:AAFdfVp8RGVtODgm89tjcnvUYrOD6jIGAus";
     }
 }
